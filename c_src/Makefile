@@ -37,13 +37,10 @@ ifeq ($(UNAME_SYS), Darwin)
 	CYRUS_LIB ?= $(CYRUS_PREFIX)/lib
 
 	CC ?= cc
-	CFLAGS ?= $(EXTRA_C_FLAGS) -std=c99 -finline-functions -Wall -Wextra -Wconversion -Wcast-align -Wformat=2 -Wformat-security \
-			  -Wmissing-prototypes -Wmissing-declarations -Wstrict-prototypes -Wstrict-overflow \
-			  -I$(CYRUS_INCLUDE) -I$(KRB5_INCLUDE)
-	CXXFLAGS ?= -O3 -finline-functions -Wall -Wextra -Wconversion -Wcast-align -Wformat=2 -Wformat-security \
-				-Wmissing-prototypes -Wmissing-declarations -Wstrict-prototypes -Wstrict-overflow \
-				-I$(CYRUS_INCLUDE) -I$(KRB5_INCLUDE)
-	LDFLAGS ?= -flat_namespace -undefined suppress
+	CFLAGS ?= -O3 -std=c99 -arch x86_64 -finline-functions -Wall -Wmissing-prototypes
+	CXXFLAGS ?= -O3 -arch x86_64 -finline-functions -Wall
+	LDFLAGS ?= -arch x86_64
+	LDFLAGS += -flat_namespace -undefined suppress
 
 	LDLIBS += -L$(CYRUS_LIB) -L$(KRB5_LIB)
 else ifeq ($(UNAME_SYS), FreeBSD)
